@@ -1,25 +1,26 @@
 package Tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class AddProductFromCardTest extends BaseTest {
 
-    //Проверка добавления товара в корзину из карточки товара
-    @Test
+    @Test(testName = "Проверка корзины", description = "Проверка добавления товара в корзину из карточки товара")
     public void checkAddProductInCartFromCard() {
+        SoftAssert softAssert = new SoftAssert();
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.openCardBackpack();
         backpackCardPage.addBackpackToCart();
         backpackCardPage.openCart();
-        Assert.assertEquals(
+        softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
                 "Не удалось перейти в корзину");
-        Assert.assertEquals(
+        softAssert.assertEquals(
                 cartPage.getItemBackPack(),
                 "Sauce Labs Backpack",
                 "Не удалось добавить рюкзак в корзину");
+        softAssert.assertAll();
     }
 }
