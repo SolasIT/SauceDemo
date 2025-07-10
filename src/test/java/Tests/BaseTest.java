@@ -4,10 +4,12 @@ import Pages.BackpackCardPage;
 import Pages.CartPage;
 import Pages.LoginPage;
 import Pages.ProductsPage;
+import jdk.jfr.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -51,7 +53,10 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            utils.AllureUtils.takeScreenshot(driver);
+        }
         driver.quit();
     }
 }

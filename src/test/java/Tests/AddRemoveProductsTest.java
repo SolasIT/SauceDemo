@@ -1,13 +1,21 @@
 package Tests;
 
 import Pages.CartPage;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class AddRemoveProductsTest extends BaseTest {
 
-    @Test(testName = "Проверка корзины", description = "Проверка добавления и удаления товара")
-    public void addRemoveProducts() {
+    @Test(testName = "Проверка удаления товара из корзины",
+            description = "Проверка добавления и удаления товара")
+    @Description("Проверка удаления товара из корзины")
+    @Severity(SeverityLevel.CRITICAL)
+    @Epic("Saucedemo-1.0")
+    @Feature("add to cart in saucedemo")
+    @Story("Удаление из корзины")
+    @TmsLink("www.jira.com/ITM-3")
+    @Issue("www.jira.com/ITM-6")public void addRemoveProducts() {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
