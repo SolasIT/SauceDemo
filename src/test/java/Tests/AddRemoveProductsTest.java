@@ -1,48 +1,44 @@
 package Tests;
 
-import org.testng.Assert;
+import Pages.CartPage;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class AddRemoveProductsTest extends BaseTest {
 
-    //Проверка добавления и удаления товара
-    @Test
+    @Test(testName = "Проверка корзины", description = "Проверка добавления и удаления товара")
     public void addRemoveProducts() {
+        SoftAssert softAssert = new SoftAssert();
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.addBackpack();
-        productsPage.addBike();
-        productsPage.addTShirt();
-        productsPage.addFleeceJacket();
+        productsPage.addToCart("Sauce Labs Backpack");
+        productsPage.addToCart("Sauce Labs Bike Light");
+        productsPage.addToCart("Sauce Labs Bolt T-Shirt");
+        productsPage.addToCart("Sauce Labs Fleece Jacket");
         productsPage.openCart();
-        Assert.assertEquals(
+        softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
                 "Не удалось перейти в корзину");
-        Assert.assertEquals(
-                cartPage.getItemBackPack(),
-                "Sauce Labs Backpack",
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Backpack"),
                 "Не удалось добавить рюкзак в корзину");
-        Assert.assertEquals(
-                cartPage.getItemBike(),
-                "Sauce Labs Bike Light",
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Bike Light"),
                 "Не удалось добавить велосипед в корзину");
-        Assert.assertEquals(
-                cartPage.getItemTShirt(),
-                "Sauce Labs Bolt T-Shirt",
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Bolt T-Shirt"),
                 "Не удалось добавить футболку в корзину");
-        Assert.assertEquals(
-                cartPage.getItemFleeceJacket(),
-                "Sauce Labs Fleece Jacket",
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Fleece Jacket"),
                 "Не удалось добавить флисовый свитер в корзину");
+
         cartPage.getRemoveBackBack();
         cartPage.getRemoveTShirt();
-
-        // Проверка удаления
-
-
-        // Проверка, что остальные товары остались
-        Assert.assertEquals(cartPage.getItemBike(), "Sauce Labs Bike Light", "Велосипед пропал после удаления");
-        Assert.assertEquals(cartPage.getItemFleeceJacket(), "Sauce Labs Fleece Jacket", "Свитер пропал после удаления");
+        softAssert.assertFalse(CartPage.isProductInCart("Sauce Labs Backpack"),
+                "Рюкзак не удалился");
+        softAssert.assertFalse(CartPage.isProductInCart("Sauce Labs Bolt T-Shirt"),
+                "Футболка не удалена");
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Bike Light"),
+                "Велосипед пропал после удаления");
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Fleece Jacket"),
+                "Свитер пропал после удаления");
+        softAssert.assertAll();
     }
 }

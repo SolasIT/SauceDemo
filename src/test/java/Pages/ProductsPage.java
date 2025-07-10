@@ -7,6 +7,10 @@ public class ProductsPage extends BasePage {
 
 
     By title = By.cssSelector("[data-test=title]");
+
+    private final String add_to_cart_pattern = "//div[text()='%s']/ancestor::" +
+            "div[@data-test='inventory-item']//button[text()='Add to cart']";
+
     By backpackButton = By.cssSelector("[data-test=add-to-cart-sauce-labs-backpack]");
     By bikeButton = By.cssSelector("[data-test=add-to-cart-sauce-labs-bike-light]");
     By tShirtButton = By.cssSelector("[data-test=add-to-cart-sauce-labs-bolt-t-shirt]");
@@ -25,6 +29,14 @@ public class ProductsPage extends BasePage {
     public String getTitle() {
         return driver.findElement(title).getText();
     }
+
+    public void addToCart(String product) {
+        driver.findElement(By.xpath(String.format(add_to_cart_pattern, product))).click();
+    }
+//
+//    public boolean isProductInCart(String product) {
+//        return driver.findElement(By.xpath(String.format("//*[@class='cart_item']//*[text()='%s']", product))).isDisplayed();
+//    }
 
     //Добавление в корзину backPac
     public void addBackpack() {

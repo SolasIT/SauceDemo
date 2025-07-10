@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class CartPage extends BasePage {
@@ -48,4 +49,17 @@ public class CartPage extends BasePage {
         return driver.findElement(itemFleeceJacket).getText();
     }
 
+    public static boolean isProductInCart(String product) {
+        try {
+            //найти и проверить видимость элемента
+            return driver.findElement(By.xpath(String.format("//*[@class='cart_item']//*[text()='%s']", product)))
+                    .isDisplayed();
+        } catch (NoSuchElementException e) {
+            // Если элемент не найден - возвращаем false
+            return false;
+        } catch (Exception e) {
+            // Другие ошибки
+            return false;
+        }
+    }
 }

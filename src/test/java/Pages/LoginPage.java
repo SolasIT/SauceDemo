@@ -9,7 +9,7 @@ public class LoginPage extends BasePage {
     private final By userField = By.id("user-name");
     private final By passwordField = By.id("password");
     private final By loginButton = By.id("login-button");
-    private final By errorMessage = By.cssSelector(".error-button");
+    private final By errorMessage = By.cssSelector("[data-test=error]");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
     public void login(String user, String password) {
         driver.findElement(userField).sendKeys(user);
         driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(loginButton).click();
+        driver.findElement(loginButton);
     }
 
     public String getErrorMessage() {
