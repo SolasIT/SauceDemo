@@ -17,8 +17,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-7")
     public void checkLoginPositive() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.open()
+                .login("standard_user", "secret_sauce");
         softAssert.assertEquals(productsPage.getTitle(),
                 "Products",
                 "Логин не выполнен");
@@ -33,8 +33,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-8")
     public void checkLoginWithEmptyFields() {
-        loginPage.open();
-        loginPage.login("", "");
+        loginPage.open()
+                .login("", "");
         softAssert.assertEquals(
                 loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
@@ -50,8 +50,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-9")
     public void checkLoginWithEmptyPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.open()
+                .login("standard_user", "");
         softAssert.assertEquals(
                 loginPage.getErrorMessage(),
                 "Epic sadface: Password is required",
@@ -67,8 +67,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-10")
     public void checkLoginWithEmptyUserName() {
-        loginPage.open();
-        loginPage.login("", "secret_sauce");
+        loginPage.open()
+                .login("", "secret_sauce");
         assertEquals(
                 loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
@@ -93,8 +93,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-10")
     public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage.open()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(),
                 expectedMessage,
                 "Сообщение не соответствует");

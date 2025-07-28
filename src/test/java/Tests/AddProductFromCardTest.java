@@ -1,5 +1,6 @@
 package Tests;
 
+import Pages.CartPage;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -17,18 +18,15 @@ public class AddProductFromCardTest extends BaseTest {
     @Issue("www.jira.com/ITM-5")
     public void checkAddProductInCartFromCard() {
         SoftAssert softAssert = new SoftAssert();
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.openCardBackpack();
-        backpackCardPage.addBackpackToCart();
-        backpackCardPage.openCart();
+        loginPage.open()
+                        .login(user, password);
+        backpackCardPage.addBackpackToCart()
+                        .openCart();
         softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
                 "Не удалось перейти в корзину");
-        softAssert.assertEquals(
-                cartPage.getItemBackPack(),
-                "Sauce Labs Backpack",
+        softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Backpack"),
                 "Не удалось добавить рюкзак в корзину");
         softAssert.assertAll();
     }

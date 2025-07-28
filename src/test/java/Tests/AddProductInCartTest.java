@@ -17,10 +17,10 @@ public class AddProductInCartTest extends BaseTest {
     @Issue("www.jira.com/ITM-4")
     public void checkAddProductInCart() {
         SoftAssert softAssert = new SoftAssert();
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addBackpack();
-        productsPage.openCart();
+        loginPage.open()
+                        .login(user, password);
+        productsPage.addToCart("BackPack")
+                        .openCart();
         softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
