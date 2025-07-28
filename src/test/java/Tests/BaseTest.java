@@ -26,6 +26,9 @@ public class BaseTest {
     BackpackCardPage backpackCardPage;
     SoftAssert softAssert = new SoftAssert();
 
+    String user = System.getProperty("user");
+    String password = System.getProperty("password");
+
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
     public void setup(@Optional("chrome") String browser) {
