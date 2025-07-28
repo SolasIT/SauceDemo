@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage {
 
@@ -20,6 +21,18 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public CartPage open() {
+        driver.get(BASE_URL + "/cart.html");
+        return this;
+    }
+
+    @Override
+    public CartPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cart));
+        return this;
+    }
+
 
     @Step("Страница корзины")
     public String getTitle() {
@@ -32,8 +45,9 @@ public class CartPage extends BasePage {
     }
 
     @Step("Удаление из корзины товара backPack")
-    public void getRemoveBackBack() {
+    public CartPage getRemoveBackBack() {
         driver.findElement(removeBackPack).click();
+        return this;
     }
 
     public String getItemTShirt() {
@@ -41,8 +55,9 @@ public class CartPage extends BasePage {
     }
 
     @Step("Удаление из корзины товара t-shirt")
-    public void getRemoveTShirt() {
+    public CartPage getRemoveTShirt() {
         driver.findElement(removeTShirt).click();
+        return this;
     }
 
     public String getItemBike() {

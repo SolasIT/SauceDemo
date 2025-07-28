@@ -17,13 +17,13 @@ public class AddRemoveProductsTest extends BaseTest {
     @TmsLink("www.jira.com/ITM-3")
     @Issue("www.jira.com/ITM-6")public void addRemoveProducts() {
         SoftAssert softAssert = new SoftAssert();
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart("Sauce Labs Backpack");
-        productsPage.addToCart("Sauce Labs Bike Light");
-        productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-        productsPage.addToCart("Sauce Labs Fleece Jacket");
-        productsPage.openCart();
+        loginPage.open()
+                        .login(user, password);
+        productsPage.addToCart("Sauce Labs Backpack")
+                .addToCart("Sauce Labs Bike Light")
+                .addToCart("Sauce Labs Bolt T-Shirt")
+                .addToCart("Sauce Labs Fleece Jacket")
+                .openCart();
         softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
@@ -37,8 +37,8 @@ public class AddRemoveProductsTest extends BaseTest {
         softAssert.assertTrue(CartPage.isProductInCart("Sauce Labs Fleece Jacket"),
                 "Не удалось добавить флисовый свитер в корзину");
 
-        cartPage.getRemoveBackBack();
-        cartPage.getRemoveTShirt();
+        cartPage.getRemoveBackBack()
+                .getRemoveTShirt();
         softAssert.assertFalse(CartPage.isProductInCart("Sauce Labs Backpack"),
                 "Рюкзак не удалился");
         softAssert.assertFalse(CartPage.isProductInCart("Sauce Labs Bolt T-Shirt"),
