@@ -1,16 +1,17 @@
 package Pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+@Log4j2
 public class ProductsPage extends BasePage {
 
     By title = By.cssSelector("[data-test=title]");
-
-    private final String add_to_cart_pattern = "//div[text()='%s']/ancestor::" +
-            "div[@data-test='inventory-item']//button[text()='Add to cart']";
 
     By backpackButton = By.cssSelector("[data-test=add-to-cart-sauce-labs-backpack]");
     By bikeButton = By.cssSelector("[data-test=add-to-cart-sauce-labs-bike-light]");
@@ -25,13 +26,19 @@ public class ProductsPage extends BasePage {
 
     @Override
     public ProductsPage open() {
+        log.info("Open login page");
         driver.get(BASE_URL + "/inventory.html");
         return this;
     }
 
     @Override
     public ProductsPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartButton));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cartButton));
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Page isn't opened");
+        }
         return this;
     }
 
@@ -42,6 +49,9 @@ public class ProductsPage extends BasePage {
 
     @Step("Добавить {product} в корзину")
     public ProductsPage addToCart(String product) {
+        log.info("Add {} to cart", product);
+        String add_to_cart_pattern = "//div[text()='%s']/ancestor::" +
+                "div[@data-test='inventory-item']//button[text()='Add to cart']";
         driver.findElement(By.xpath(String.format(add_to_cart_pattern, product))).click();
         return this;
     }

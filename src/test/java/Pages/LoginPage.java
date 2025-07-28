@@ -1,10 +1,14 @@
 package Pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+@Log4j2
 public class LoginPage extends BasePage {
 
 
@@ -20,18 +24,25 @@ public class LoginPage extends BasePage {
     @Step("Открытие страницы сайта")
     @Override
     public LoginPage open() {
+        log.info("Open login page");
         driver.get(BASE_URL);
         return this;
     }
 
     @Override
     public LoginPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(userField));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(userField));
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Page isn't opened");
+        }
         return this;
     }
 
     @Step("Авторизация")
     public ProductsPage login(String user, String password) {
+        log.info("Login with credential: {} {}", user, password);
         driver.findElement(userField).sendKeys(user);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(loginButton).click();

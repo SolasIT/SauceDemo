@@ -4,7 +4,6 @@ import Pages.BackpackCardPage;
 import Pages.CartPage;
 import Pages.LoginPage;
 import Pages.ProductsPage;
-import jdk.jfr.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,7 +16,7 @@ import org.testng.asserts.SoftAssert;
 import java.time.Duration;
 import java.util.HashMap;
 
-@Listeners(TestListener.class)
+@Listeners(tests.TestListener.class)
 public class BaseTest {
 
     WebDriver driver;

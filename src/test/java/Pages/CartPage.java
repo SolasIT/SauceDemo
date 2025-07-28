@@ -1,11 +1,15 @@
 package Pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+@Log4j2
 public class CartPage extends BasePage {
 
 
@@ -21,55 +25,9 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    @Override
-    public CartPage open() {
-        driver.get(BASE_URL + "/cart.html");
-        return this;
-    }
-
-    @Override
-    public CartPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cart));
-        return this;
-    }
-
-
-    @Step("Страница корзины")
-    public String getTitle() {
-        return driver.findElement(cart).getText();
-    }
-
-    @Step("Рюкзак в корзине")
-    public String getItemBackPack() {
-        return driver.findElement(itemBackPack).getText();
-    }
-
-    @Step("Удаление из корзины товара backPack")
-    public CartPage getRemoveBackBack() {
-        driver.findElement(removeBackPack).click();
-        return this;
-    }
-
-    public String getItemTShirt() {
-        return driver.findElement(itemTShirt).getText();
-    }
-
-    @Step("Удаление из корзины товара t-shirt")
-    public CartPage getRemoveTShirt() {
-        driver.findElement(removeTShirt).click();
-        return this;
-    }
-
-    public String getItemBike() {
-        return driver.findElement(itemBike).getText();
-    }
-
-    public String getItemFleeceJacket() {
-        return driver.findElement(itemFleeceJacket).getText();
-    }
-
     @Step("Поиск товара в корзине")
     public static boolean isProductInCart(String product) {
+        log.info("Searching item in cart");
         try {
             //найти и проверить видимость элемента
             return driver.findElement(By.xpath(String.format("//*[@class='cart_item']//*[text()='%s']", product)))
@@ -81,5 +39,59 @@ public class CartPage extends BasePage {
             // Другие ошибки
             return false;
         }
+    }
+
+    @Override
+    public CartPage open() {
+        log.info("Open login page");
+        driver.get(BASE_URL + "/cart.html");
+        return this;
+    }
+
+    @Step("Страница корзины")
+    public String getTitle() {
+        return driver.findElement(cart).getText();
+    }
+
+    @Step("Рюкзак в корзине")
+    public String getItemBackPack() {
+        return driver.findElement(itemBackPack).getText();
+    }
+
+    @Override
+    public CartPage isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cart));
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Page isn't opened");
+        }
+        return this;
+    }
+
+    public String getItemTShirt() {
+        return driver.findElement(itemTShirt).getText();
+    }
+
+    @Step("Удаление из корзины товара backPack")
+    public CartPage getRemoveBackBack() {
+        log.info("Remove back pack");
+        driver.findElement(removeBackPack).click();
+        return this;
+    }
+
+    public String getItemBike() {
+        return driver.findElement(itemBike).getText();
+    }
+
+    public String getItemFleeceJacket() {
+        return driver.findElement(itemFleeceJacket).getText();
+    }
+
+    @Step("Удаление из корзины товара t-shirt")
+    public CartPage getRemoveTShirt() {
+        log.info("Remove T shirt");
+        driver.findElement(removeTShirt).click();
+        return this;
     }
 }
