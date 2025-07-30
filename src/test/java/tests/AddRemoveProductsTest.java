@@ -15,10 +15,11 @@ public class AddRemoveProductsTest extends BaseTest {
     @Feature("add to cart in saucedemo")
     @Story("Удаление из корзины")
     @TmsLink("www.jira.com/ITM-3")
-    @Issue("www.jira.com/ITM-6")public void addRemoveProducts() {
+    @Issue("www.jira.com/ITM-6")
+    public void addRemoveProducts() {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open()
-                        .login(user, password);
+                .login(user, password);
         productsPage.addToCart("Sauce Labs Backpack")
                 .addToCart("Sauce Labs Bike Light")
                 .addToCart("Sauce Labs Bolt T-Shirt")

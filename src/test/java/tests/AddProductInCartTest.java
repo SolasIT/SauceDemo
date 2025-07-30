@@ -18,9 +18,9 @@ public class AddProductInCartTest extends BaseTest {
     public void checkAddProductInCart() {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open()
-                        .login(user, password);
+                .login(user, password);
         productsPage.addToCart("BackPack")
-                        .openCart();
+                .openCart();
         softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",

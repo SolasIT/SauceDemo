@@ -1,18 +1,19 @@
 package Pages;
 
-import lombok.Data;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public abstract class BasePage {
 
-    protected final String BASE_URL = "https://www.saucedemo.com";
-
     static WebDriver driver;
+    protected final String BASE_URL = "https://www.saucedemo.com";
     WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
+        BasePage.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public abstract BasePage open();

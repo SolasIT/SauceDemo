@@ -63,7 +63,7 @@ public class BaseTest {
         if (ITestResult.FAILURE == result.getStatus()) {
             utils.AllureUtils.takeScreenshot(driver);
         }
-        if (driver !=null) {
+        if (driver != null) {
             driver.quit();
         }
     }

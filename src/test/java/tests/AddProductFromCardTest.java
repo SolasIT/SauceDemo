@@ -19,11 +19,11 @@ public class AddProductFromCardTest extends BaseTest {
     public void checkAddProductInCartFromCard() {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open()
-                        .login(user, password);
+                .login(user, password);
         productsPage.openCardBackpack();
         backpackCardPage.isPageOpened()
-                        .addBackpackToCart()
-                        .openCart();
+                .addBackpackToCart()
+                .openCart();
         softAssert.assertEquals(
                 cartPage.getTitle(),
                 "Your Cart",
