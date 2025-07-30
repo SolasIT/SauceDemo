@@ -9,7 +9,7 @@ public abstract class BasePage {
 
     static WebDriver driver;
     protected final String BASE_URL = "https://www.saucedemo.com";
-    WebDriverWait wait;
+    static WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         BasePage.driver = driver;

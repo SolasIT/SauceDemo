@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -39,14 +40,16 @@ public class BackpackCardPage extends BasePage {
     @Step("Добавление товара backPack в корзину из карточки товара")
     public BackpackCardPage addBackpackToCart() {
         log.info("Add backpack from card");
-        driver.findElement(addToCartButton).click();
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+        addButton.click();
         return this;
     }
 
     @Step("Нажатие и переход в корзину из карточки товара")
     public CartPage openCart() {
         log.info("Click cart");
-        driver.findElement(cart).click();
+        WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(cart));
+        cartButton.click();
         return new CartPage(driver);
     }
 }
