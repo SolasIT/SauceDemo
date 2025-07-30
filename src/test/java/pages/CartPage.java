@@ -1,11 +1,8 @@
-package Pages;
+package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -30,8 +27,8 @@ public class CartPage extends BasePage {
         log.info("Searching item in cart");
         try {
             //найти и проверить видимость элемента
-            return driver.findElement(By.xpath(String.format("//*[@class='cart_item']//*[text()='%s']", product)))
-                    .isDisplayed();
+            By productLocator = By.xpath(String.format("//*[@class='cart_item']//*[text()='%s']", product));
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(productLocator)).isDisplayed();
         } catch (NoSuchElementException e) {
             // Если элемент не найден - возвращаем false
             return false;
@@ -76,7 +73,8 @@ public class CartPage extends BasePage {
     @Step("Удаление из корзины товара backPack")
     public CartPage getRemoveBackBack() {
         log.info("Remove back pack");
-        driver.findElement(removeBackPack).click();
+        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(removeBackPack));
+        removeButton.click();
         return this;
     }
 
@@ -91,7 +89,8 @@ public class CartPage extends BasePage {
     @Step("Удаление из корзины товара t-shirt")
     public CartPage getRemoveTShirt() {
         log.info("Remove T shirt");
-        driver.findElement(removeTShirt).click();
+        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(removeTShirt));
+        removeButton.click();
         return this;
     }
 }

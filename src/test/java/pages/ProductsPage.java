@@ -1,10 +1,11 @@
-package Pages;
+package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -44,7 +45,7 @@ public class ProductsPage extends BasePage {
 
     @Step("Страница с товарами")
     public String getTitle() {
-        return driver.findElement(title).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
     }
 
     @Step("Добавить {product} в корзину")
@@ -52,7 +53,9 @@ public class ProductsPage extends BasePage {
         log.info("Add {} to cart", product);
         String add_to_cart_pattern = "//div[text()='%s']/ancestor::" +
                 "div[@data-test='inventory-item']//button[text()='Add to cart']";
-        driver.findElement(By.xpath(String.format(add_to_cart_pattern, product))).click();
+        By productLocator = By.xpath(String.format(add_to_cart_pattern, product));
+        WebElement addButton = wait.until(ExpectedConditions.visibilityOfElementLocated(productLocator));
+        addButton.click();
         return this;
     }
 //
@@ -83,14 +86,16 @@ public class ProductsPage extends BasePage {
 
     @Step("Переход в корзину")
     public CartPage openCart() {
-        driver.findElement(cartButton).click();
+        WebElement cart = wait.until(ExpectedConditions.visibilityOfElementLocated(cartButton));
+        cart.click();
         return new CartPage(driver);
     }
 
     //Нажатие и переход в карточку товара backPack
     @Step("Нажатие и переход в карточку товара backPack")
     public BackpackCardPage openCardBackpack() {
-        driver.findElement(backpackCard).click();
+        WebElement backpack = wait.until(ExpectedConditions.visibilityOfElementLocated(backpackCard));
+        backpack.click();
         return new BackpackCardPage(driver);
     }
 }

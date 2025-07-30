@@ -1,6 +1,6 @@
 package tests;
 
-import Pages.CartPage;
+import pages.CartPage;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

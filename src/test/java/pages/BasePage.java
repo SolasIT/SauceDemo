@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,7 +9,7 @@ public abstract class BasePage {
 
     static WebDriver driver;
     protected final String BASE_URL = "https://www.saucedemo.com";
-    WebDriverWait wait;
+    static WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         BasePage.driver = driver;
