@@ -40,7 +40,7 @@ public class BackpackCardPage extends BasePage {
     @Step("Добавление товара backPack в корзину из карточки товара")
     public BackpackCardPage addBackpackToCart() {
         log.info("Add backpack from card");
-        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+        WebElement addButton = wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartButton));
         addButton.click();
         return this;
     }
@@ -48,7 +48,7 @@ public class BackpackCardPage extends BasePage {
     @Step("Нажатие и переход в корзину из карточки товара")
     public CartPage openCart() {
         log.info("Click cart");
-        WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(cart));
+        WebElement cartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(cart));
         cartButton.click();
         return new CartPage(driver);
     }

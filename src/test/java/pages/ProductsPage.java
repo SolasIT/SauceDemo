@@ -54,7 +54,7 @@ public class ProductsPage extends BasePage {
         String add_to_cart_pattern = "//div[text()='%s']/ancestor::" +
                 "div[@data-test='inventory-item']//button[text()='Add to cart']";
         By productLocator = By.xpath(String.format(add_to_cart_pattern, product));
-        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(productLocator));
+        WebElement addButton = wait.until(ExpectedConditions.visibilityOfElementLocated(productLocator));
         addButton.click();
         return this;
     }
@@ -86,7 +86,7 @@ public class ProductsPage extends BasePage {
 
     @Step("Переход в корзину")
     public CartPage openCart() {
-        WebElement cart = wait.until(ExpectedConditions.elementToBeClickable(cartButton));
+        WebElement cart = wait.until(ExpectedConditions.visibilityOfElementLocated(cartButton));
         cart.click();
         return new CartPage(driver);
     }
@@ -94,7 +94,7 @@ public class ProductsPage extends BasePage {
     //Нажатие и переход в карточку товара backPack
     @Step("Нажатие и переход в карточку товара backPack")
     public BackpackCardPage openCardBackpack() {
-        WebElement backpack = wait.until(ExpectedConditions.elementToBeClickable(backpackCard));
+        WebElement backpack = wait.until(ExpectedConditions.visibilityOfElementLocated(backpackCard));
         backpack.click();
         return new BackpackCardPage(driver);
     }

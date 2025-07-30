@@ -73,7 +73,7 @@ public class CartPage extends BasePage {
     @Step("Удаление из корзины товара backPack")
     public CartPage getRemoveBackBack() {
         log.info("Remove back pack");
-        WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(removeBackPack));
+        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(removeBackPack));
         removeButton.click();
         return this;
     }
@@ -89,7 +89,7 @@ public class CartPage extends BasePage {
     @Step("Удаление из корзины товара t-shirt")
     public CartPage getRemoveTShirt() {
         log.info("Remove T shirt");
-        WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(removeTShirt));
+        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(removeTShirt));
         removeButton.click();
         return this;
     }
