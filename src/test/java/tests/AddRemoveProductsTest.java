@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import Pages.CartPage;
 import io.qameta.allure.*;

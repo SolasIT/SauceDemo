@@ -8,12 +8,12 @@
             </run>
         </groups>
         <classes>
-            <class name="Tests.LoginTest">
+            <class name="tests.LoginTest">
                 <parameter name="browser" value="chrome">
                 </parameter>
             </class>
-            <class name="Tests.AddProductInCartTest"/>
-            <class name="Tests.AddProductFromCardTest"/>
+            <class name="tests.AddProductInCartTest"/>
+            <class name="tests.AddProductFromCardTest"/>
         </classes>
     </test>
     <test name="Edge">
@@ -23,9 +23,9 @@
         <!--            </run>-->
         <!--        </groups>-->
         <classes>
-            <class name="Tests.LoginTest"/>
-            <class name="Tests.AddProductInCartTest"/>
-            <class name="Tests.AddProductFromCardTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.AddProductInCartTest"/>
+            <class name="tests.AddProductFromCardTest"/>
             <parameter name="browser" value="edge">
             </parameter>
         </classes>

@@ -3,8 +3,8 @@
 <suite name="SauceDemo TestRetry">
 
     <listeners>
-        <listener class-name="Tests.TestListener"/>
-        <listener class-name="Tests.AnnotationTransformer"/>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name="tests.AnnotationTransformer"/>
     </listeners>
 
     <test name="Thread#1">
@@ -14,9 +14,9 @@
             </run>
         </groups>
         <classes>
-            <class name="Tests.LoginTest"/>
-            <class name="Tests.AddProductFromCardTest"/>
-            <class name="Tests.AddProductInCartTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.AddProductFromCardTest"/>
+            <class name="tests.AddProductInCartTest"/>
         </classes>
     </test>
     <test name="Thread#2">
@@ -26,8 +26,8 @@
             </run>
         </groups>
         <classes>
-            <class name="Tests.AddProductFromCardTest"/>
-            <class name="Tests.AddProductInCartTest"/>
+            <class name="tests.AddProductFromCardTest"/>
+            <class name="tests.AddProductInCartTest"/>
         </classes>
     </test>
 </suite>

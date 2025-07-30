@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import Pages.BackpackCardPage;
 import Pages.CartPage;
