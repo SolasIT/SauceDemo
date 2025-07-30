@@ -10,22 +10,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.HashMap;
 
-public class LocatorTest {
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setup() {
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        driver = new ChromeDriver(options);
-    }
+public class LocatorTest extends BaseTest{
 
     @Test
     public void checkLocators() {
@@ -85,7 +70,5 @@ public class LocatorTest {
         driver.findElement(By.cssSelector("[class$='container']"));
         // 12. [attribute*=value]по части значения
         driver.findElements(By.cssSelector("[class*='cart']"));
-
-        driver.quit();
     }
 }
