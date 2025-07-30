@@ -1,9 +1,9 @@
 package tests;
 
-import Pages.BackpackCardPage;
-import Pages.CartPage;
-import Pages.LoginPage;
-import Pages.ProductsPage;
+import pages.BackpackCardPage;
+import pages.CartPage;
+import pages.LoginPage;
+import pages.ProductsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
